@@ -11,6 +11,7 @@ export interface File {
   size: number;
   hash: string;
   state: number;
+  meta?: Record<string, string>;
 }
 
 const queryFiles = async (state: number) => {

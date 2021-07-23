@@ -32,6 +32,7 @@
     "@anitya/relive-cms-api": "^0.0.5",
     "@geektr/strapi-client": "^0.0.4",
     "@gtr/config": "^1.0.1",
+    "aws-sdk": "^2.951.0",
     "axios": "^0.21.1",
     "mz": "^2.7.0",
     "xbytes": "^1.7.0"
