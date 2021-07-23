@@ -3,19 +3,28 @@ import { S3 } from "aws-sdk";
 import { getLogger } from "../common/log";
 import { cms } from "../relive-cms/relive-cms";
 
-const storage_policy = "60f985ef72a62f7dd74fd0ef";
+// Anita
+// const storage_policy = "60f985ef72a62f7dd74fd0ef";
+// const vault_path = "projects/anitya/relive/base/minio/ro";
+// const bucket = "relive-bili";
+
+// Tomoyo Temp Store
+const storage_policy = "60fa972f72a62f7dd7507d14";
+const vault_path = "projects/random/tomoyo.minio";
+const bucket = "oss";
+
 const task_id = new Date().getTime().toString(36);
 
 const start = async () => {
-  const logger = await getLogger("sync-minio", task_id);
+  const logger = await getLogger("sync-minio", `${storage_policy}:${task_id}`);
 
-  const minioCred = await getVaultItem("projects/anitya/relive/base/minio/ro");
+  const minioCred = await getVaultItem(vault_path);
   const minio = new S3({
     accessKeyId: minioCred.minio_access_key,
     secretAccessKey: minioCred.minio_secret_key,
     endpoint: minioCred.minio_server,
+    s3ForcePathStyle: true,
   });
-  const bucket = "relive-bili";
 
   let Marker = "";
 
