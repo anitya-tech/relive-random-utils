@@ -11,3 +11,4 @@ package-lock.json
 data
 dist
 tsconfig.tsbuildinfo
+logs
