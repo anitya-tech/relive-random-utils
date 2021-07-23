@@ -14,6 +14,7 @@
     "watch:build": "tsc -p tsconfig.json -w"
   },
   "devDependencies": {
+    "@types/ali-oss": "^6.0.10",
     "@types/mz": "^2.7.4",
     "@types/node": "^14.14.10",
     "@typescript-eslint/eslint-plugin": "^4.9.1",
@@ -32,6 +33,7 @@
     "@anitya/relive-cms-api": "^0.0.5",
     "@geektr/strapi-client": "^0.0.4",
     "@gtr/config": "^1.0.1",
+    "ali-oss": "^6.16.0",
     "aws-sdk": "^2.951.0",
     "axios": "^0.21.1",
     "mz": "^2.7.0",
