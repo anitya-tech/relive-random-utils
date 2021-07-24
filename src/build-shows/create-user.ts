@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CmsApi } from "../relive-cms/relive-cms";
+import { CmsApi } from "./cms-api";
 
 interface RoomInfo {
   roomid: string;

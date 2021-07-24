@@ -1,5 +1,5 @@
 import { getLogger } from "../common/log";
-import { CmsApi } from "../relive-cms/relive-cms";
+import { CmsApi } from "./cms-api";
 import fs from "fs/promises";
 
 const limit = 1000;

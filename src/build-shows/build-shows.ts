@@ -1,9 +1,8 @@
 import fs from "fs/promises";
 
-import { CmsApi } from "../relive-cms/relive-cms";
 import { batchCreateUsers } from "./create-user";
 import { File } from "./load-files";
-
+import { CmsApi } from "./cms-api";
 export interface VideoClip {
   start_time: Date;
   store: string[];

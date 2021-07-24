@@ -5,6 +5,19 @@ export const CmsApi = new Api(() =>
   getVaultItem<ApiOptions>("projects/anitya/relive/cms/dev/admin-login")
 );
 
+export const dev = new Api(() =>
+  getVaultItem<ApiOptions>("projects/anitya/relive/cms/dev/admin-login")
+);
+
+// save my aliyun cdn data
+// /ip dns static add address=[:resolve konga.geektr.co] name=local.cms.relive.1453.tv
+export const prod = new Api(async () => {
+  const opts = await getVaultItem<ApiOptions>(
+    "projects/anitya/relive/cms/prod/admin-login"
+  );
+  return { ...opts, baseURL: "http://local.cms.relive.1453.tv" };
+});
+
 export interface File {
   storage_policy: string;
   path: string;
@@ -27,7 +40,9 @@ const addFile = async (file: File) => {
 };
 
 const updateFile = async (id: string, state: number) => {
-  const { data } = await CmsApi.instance.post(`/storage-files/${id}`, { state });
+  const { data } = await CmsApi.instance.post(`/storage-files/${id}`, {
+    state,
+  });
   return data;
 };
 
