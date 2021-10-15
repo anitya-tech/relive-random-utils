@@ -1,8 +1,8 @@
 import fs from "fs/promises";
 
+import { CmsApi } from "./cms-api";
 import { batchCreateUsers } from "./create-user";
 import { File } from "./load-files";
-import { CmsApi } from "./cms-api";
 export interface VideoClip {
   start_time: Date;
   store: string[];
@@ -61,6 +61,10 @@ const run = async () => {
     const determainDuration = Math.ceil(3600 * 1000 * 1.2);
 
     for (const file of fileList) {
+      if (!file.id) {
+        console.log(file);
+        throw "no id";
+      }
       const fileStart = file.datetime.getTime();
       let showFileSet = showFileSets.find(
         (i) =>
@@ -117,10 +121,23 @@ const run = async () => {
         video_track.push(clip);
       }
 
-      if (file.type === "cover") clip.thumbnail.push(file.id);
-      if (file.type === "video") clip.store.push(file.id);
-      if (file.type === "raw_video") clip.origin.push(file.id);
-      if (file.type === "audio") clip.audio.push(file.id);
+      switch (file.type) {
+        case "cover":
+          clip.thumbnail.push(file.id);
+          break;
+        case "video":
+          clip.store.push(file.id);
+          break;
+        case "raw_video":
+          clip.origin.push(file.id);
+          break;
+        case "audio":
+          clip.audio.push(file.id);
+          break;
+        default:
+          console.log(file);
+          break;
+      }
     }
 
     video_track.sort((x, y) => x.start_time.getTime() - y.start_time.getTime());
@@ -138,6 +155,20 @@ const run = async () => {
     };
 
     const apply_start = new Date().getTime();
+    if (show.danmaku_track.find((i) => i.store.length === 0)) {
+      console.log(JSON.stringify(show));
+    }
+    if (
+      show.video_track.find(
+        (i) =>
+          i.store.length === 0 &&
+          i.audio.length === 0 &&
+          i.origin.length === 0 &&
+          i.thumbnail.length === 0
+      )
+    ) {
+      console.log(JSON.stringify(show));
+    }
     await applyShow(show);
     if (new Date().getTime() - apply_start > 1000) {
       console.log(`${show.room_id}: ${show.start_time}`);
