@@ -56,4 +56,63 @@ async function start() {
   }
 }
 
-start();
+async function fixMetadata() {
+  const s3 = await getS3();
+
+  let ContinuationToken: string | undefined;
+
+  do {
+    const { Contents, NextContinuationToken } = await s3
+      .listObjectsV2({
+        ContinuationToken,
+        Bucket: S3Bucket,
+        Prefix: S3KeyPrefix,
+        MaxKeys: 100,
+      })
+      .promise();
+
+    if (!Contents) break;
+
+    for (const obj of Contents) {
+      const Key = obj.Key as string;
+      console.log(Key);
+      if (!/^live-gifts\/\d+\/\d{4}\/\d{2}-\d{2}[^/]*\.json$/.test(Key)) {
+        console.log("continue");
+        continue;
+      }
+
+      const resp = await s3.getObject({ Bucket: S3Bucket, Key }).promise();
+
+      const Metadata = resp.Metadata || {};
+
+      if (Metadata["content-type"] || Metadata["cache-control"]) {
+        const ContentType =
+          Metadata["content-type"] || resp.ContentType || undefined;
+        const CacheControl =
+          Metadata["cache-control"] || resp.CacheControl || undefined;
+
+        delete Metadata["content-type"];
+        delete Metadata["cache-control"];
+
+        console.log(ContentType);
+        console.log(CacheControl);
+        console.log(Metadata);
+
+        await s3
+          .putObject({
+            Body: resp.Body,
+            Bucket: S3Bucket,
+            Key,
+            ContentType,
+            CacheControl,
+            Metadata,
+          })
+          .promise();
+      }
+    }
+
+    ContinuationToken = NextContinuationToken;
+  } while (ContinuationToken);
+}
+
+fixMetadata();

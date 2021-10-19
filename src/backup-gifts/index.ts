@@ -70,17 +70,18 @@ async function syncHistory(uid: number) {
     const KeyPreifx = `${S3KeyPrefix}/${uid}/${pointer.format(
       "YYYY"
     )}/${pointer.format("MM-DD")}`;
-    const JsonMetadata = {
-      "content-type": "application/json",
-      "cache-control": "public, max-age=31536000",
+
+    const params = {
+      Bucket: S3Bucket,
+      ContentType: "application/json",
+      CacheControl: "public, max-age=31536000",
     };
 
     if (gifts.length) {
       await s3
         .putObject({
-          Bucket: S3Bucket,
+          ...params,
           Key: `${KeyPreifx}.all.json`,
-          Metadata: JsonMetadata,
           Body: JSON.stringify(gifts),
         })
         .promise();
@@ -90,9 +91,8 @@ async function syncHistory(uid: number) {
     if (goldGifts.length) {
       await s3
         .putObject({
-          Bucket: S3Bucket,
+          ...params,
           Key: `${KeyPreifx}.gold.json`,
-          Metadata: JsonMetadata,
           Body: JSON.stringify(goldGifts),
         })
         .promise();
