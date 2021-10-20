@@ -87,7 +87,7 @@ async function syncHistory(uid: number) {
         .promise();
     }
 
-    const goldGifts = gifts.filter((i) => i.gold);
+    const goldGifts = gifts.filter((i) => i.hamster);
     if (goldGifts.length) {
       await s3
         .putObject({
