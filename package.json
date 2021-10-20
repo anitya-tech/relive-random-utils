@@ -38,6 +38,7 @@
     "ali-oss": "^6.16.0",
     "aws-sdk": "^2.951.0",
     "axios": "^0.21.1",
+    "dynamoose": "^2.8.2",
     "ioredis": "^4.28.0",
     "moment-timezone": "^0.5.33",
     "mz": "^2.7.0",
