@@ -1,5 +1,6 @@
-import { getVaultItem } from "@gtr/config";
+import { vault } from "@gtr/config";
 import { S3 } from "aws-sdk";
+
 import { getLogger } from "../common/log";
 import { cms } from "../relive-cms/relive-cms";
 
@@ -18,7 +19,7 @@ const task_id = new Date().getTime().toString(36);
 const start = async () => {
   const logger = await getLogger("sync-minio", `${storage_policy}:${task_id}`);
 
-  const minioCred = await getVaultItem(vault_path);
+  const minioCred = await vault.get(vault_path);
   const minio = new S3({
     accessKeyId: minioCred.minio_access_key,
     secretAccessKey: minioCred.minio_secret_key,
@@ -66,7 +67,7 @@ const start = async () => {
             task_id: task_id,
           },
         });
-      } catch (e) {
+      } catch (e: any) {
         await logger.error(item.Key);
         await logger.error(e.message);
       }

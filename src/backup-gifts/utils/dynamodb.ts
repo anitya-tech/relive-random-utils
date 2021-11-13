@@ -1,7 +1,6 @@
-import { getVaultItem } from "@gtr/config";
+import { vault } from "@gtr/config";
+import { onceAsync } from "@gtr/utils";
 import * as dynamoose from "dynamoose";
-
-import { onceAsync } from "./once-async";
 
 interface AwsCreds {
   AWS_ACCESS_KEY_ID: string;
@@ -10,7 +9,7 @@ interface AwsCreds {
 }
 
 export const initDynamoose = onceAsync(async () => {
-  const secert = await getVaultItem<AwsCreds>("geektr.co/aws/cn/temp-dynamodb");
+  const secert = await vault.get<AwsCreds>("geektr.co/aws/cn/temp-dynamodb");
 
   dynamoose.aws.sdk.config.update({
     accessKeyId: secert.AWS_ACCESS_KEY_ID,

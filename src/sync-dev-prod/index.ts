@@ -1,4 +1,3 @@
-import { getVaultItem } from "@gtr/config";
 import { dev, prod } from "../relive-cms/relive-cms";
 
 const BatchSize = 1000;

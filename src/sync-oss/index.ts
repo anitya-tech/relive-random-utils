@@ -1,5 +1,6 @@
-import { getVaultItem } from "@gtr/config";
+import { vault } from "@gtr/config";
 import OSS from "ali-oss";
+
 import { getLogger } from "../common/log";
 import { cms } from "../relive-cms/relive-cms";
 
@@ -10,12 +11,9 @@ const bucket = "stream-publish";
 const task_id = new Date().getTime().toString(36);
 
 const start = async () => {
-  const logger = await getLogger(
-    "sync-oss",
-    `${storage_policy}:${task_id}`
-  );
+  const logger = await getLogger("sync-oss", `${storage_policy}:${task_id}`);
 
-  const ossCred = await getVaultItem(vault_path);
+  const ossCred = await vault.get(vault_path);
   console.log(ossCred.Ali_Key);
   const client = new OSS({
     accessKeyId: ossCred.Ali_Key,
@@ -58,7 +56,7 @@ const start = async () => {
             task_id: task_id,
           },
         });
-      } catch (e) {
+      } catch (e: any) {
         await logger.error(item.name);
         await logger.error(e.message);
       }

@@ -1,18 +1,18 @@
-import { getVaultItem } from "@gtr/config";
 import { Api, ApiOptions } from "@geektr/strapi-client";
+import { vault } from "@gtr/config";
 
 export const CmsApi = new Api(() =>
-  getVaultItem<ApiOptions>("projects/anitya/relive/cms/dev/admin-login")
+  vault.get<ApiOptions>("projects/anitya/relive/cms/dev/admin-login")
 );
 
 export const dev = new Api(() =>
-  getVaultItem<ApiOptions>("projects/anitya/relive/cms/dev/admin-login")
+  vault.get<ApiOptions>("projects/anitya/relive/cms/dev/admin-login")
 );
 
 // save my aliyun cdn data
 // /ip dns static add address=[:resolve konga.geektr.co] name=local.cms.relive.1453.tv
 export const prod = new Api(async () => {
-  const opts = await getVaultItem<ApiOptions>(
+  const opts = await vault.get<ApiOptions>(
     "projects/anitya/relive/cms/prod/admin-login"
   );
   return { ...opts, baseURL: "http://local.cms.relive.1453.tv" };

@@ -61,10 +61,35 @@
     axios "^0.21.1"
     jsonwebtoken "^8.5.1"
 
+"@gtr-infra/minio@^0.0.3":
+  version "0.0.3"
+  resolved "https://npm.geektr.co/@gtr-infra%2fminio/-/minio-0.0.3.tgz#4d63b47855f7f63f696929e67be93d6cac563695"
+  integrity sha512-cvztAEWFpNMZWb9GD9bRwVhkeObN5yWDT3M2ZZt1Qyf1hVvV5gY8NZiLcB09+POoBQuuf/192afjTcj7b/y6Cg==
+  dependencies:
+    "@gtr/config" "^1.1.0"
+    aws-sdk "^2.1028.0"
+
+"@gtr-infra/redis@^0.0.2":
+  version "0.0.2"
+  resolved "https://npm.geektr.co/@gtr-infra%2fredis/-/redis-0.0.2.tgz#3bb583aa7d5a05243db8c34ef588057fa9334542"
+  integrity sha512-cuyWpurzHLWwMK/yMGP0JpSc/hBjamB3Q3R+HZusrLF3Tv6yXF7gRWkdf7jWSNG1TV++LdWhDQqBkQdbzzgscw==
+  dependencies:
+    ioredis "^4.28.0"
+
 "@gtr/config@^1.0.1":
   version "1.0.1"
   resolved "https://npm.geektr.co/@gtr%2fconfig/-/config-1.0.1.tgz#09af091d50303087afd66696e80a13ed76ec8853"
   integrity sha512-57bYv7Po58dr2bqirVGIQWDDDzovzmugjn5S/UJ52Cgz+sP7QU5lI5+qPa1Uz//1pAK6QnOXZX39ipyjfq+w9A==
+  dependencies:
+    axios "^0.21.1"
+    dotenv "^10.0.0"
+    is-docker "^2.2.1"
+    lodash.set "^4.3.2"
+
+"@gtr/config@^1.1.0":
+  version "1.1.0"
+  resolved "https://npm.geektr.co/@gtr%2fconfig/-/config-1.1.0.tgz#30e234ef685b75caa63371ee165491af88e2b743"
+  integrity sha512-7r0MHsmbsSiS8vIPnYmyAUxkX5eIQI0zyCo7Zj8VbZIrdzGcjBjMKXoholGbF2zkmInu61VwgEn1QpF/K0S9eQ==
   dependencies:
     axios "^0.21.1"
     dotenv "^10.0.0"
@@ -79,6 +104,11 @@
     "@gtr/config" "^1.0.1"
     axios "^0.22.0"
     moment-timezone "^0.5.33"
+
+"@gtr/utils@^0.0.2":
+  version "0.0.2"
+  resolved "https://npm.geektr.co/@gtr%2futils/-/utils-0.0.2.tgz#910bc15951ad07bcbb8f995158570c2a3d402b23"
+  integrity sha512-gdD2Hsz4oP9WYVztgrGD96JvNw2ArgqI4+iJIxCJ0i1R5aj0ckzhnI2jLVlVS5KeXfWi+d4mY/GpmNC8fLd2zA==
 
 "@humanwhocodes/config-array@^0.5.0":
   version "0.5.0"
@@ -418,6 +448,21 @@ astral-regex@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/astral-regex/-/astral-regex-2.0.0.tgz#483143c567aeed4785759c0865786dc77d7d2e31"
   integrity sha512-Z7tMw1ytTXt5jqMcOP+OQteU1VuNK9Y02uuJtKQ1Sv69jXQKKg5cibLwGJow8yzZP+eAc18EmLGPal0bp36rvQ==
+
+aws-sdk@^2.1028.0:
+  version "2.1028.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1028.0.tgz#ce076076174afa9bd311406b8186ea90163e3331"
+  integrity sha512-OmR0NcpU8zsDcUOZhM+eZ6CzlUFtuaEuRyjm6mxDO0KI7lJAp7/NzB6tcellRrgWxL+NO7b5TSxi+m28qu5ocQ==
+  dependencies:
+    buffer "4.9.2"
+    events "1.1.1"
+    ieee754 "1.1.13"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.3.2"
+    xml2js "0.4.19"
 
 aws-sdk@^2.951.0, aws-sdk@^2.968.0:
   version "2.1009.0"
