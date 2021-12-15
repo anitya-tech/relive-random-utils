@@ -29,6 +29,7 @@ const start = async () => {
 
   let Marker = "";
 
+  // eslint-disable-next-line no-constant-condition
   while (true) {
     const { NextMarker, Contents } = await minio
       .listObjects({ Bucket: bucket, MaxKeys: 1000, Marker })

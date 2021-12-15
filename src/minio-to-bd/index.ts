@@ -2,8 +2,8 @@ import fs from "fs";
 import path from "path";
 import { Readable } from "stream";
 
-import { EasyS3, initMinio } from "infra-minio-v0";
 import { hash, pipeline } from "@gtr/utils";
+import { EasyS3, initMinio } from "infra-minio-v0";
 import { execFile } from "mz/child_process";
 
 import { getLogger } from "../common/log";

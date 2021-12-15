@@ -1,8 +1,8 @@
 import fs from "fs/promises";
 import path from "path";
 
-import { EasyS3 } from "infra-minio-v0";
 import { ReceivedGiftStreamList } from "@gtr/random-bilibili-api";
+import { EasyS3 } from "infra-minio-v0";
 import moment from "moment-timezone";
 
 import { getS3, S3Bucket, S3KeyPrefix } from "./config";

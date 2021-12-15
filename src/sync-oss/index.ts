@@ -24,6 +24,7 @@ const start = async () => {
 
   let marker = "";
 
+  // eslint-disable-next-line no-constant-condition
   while (true) {
     const { nextMarker, objects } = await client.list(
       { "max-keys": 1000, marker },

@@ -1,5 +1,5 @@
-import { EasyS3 } from "infra-minio-v0";
 import { ReceivedGiftStreamList } from "@gtr/random-bilibili-api";
+import { EasyS3 } from "infra-minio-v0";
 
 import { getS3, S3Bucket, S3KeyPrefix } from "./config";
 

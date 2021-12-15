@@ -24,7 +24,7 @@ const ls = async (dir_path: string): Promise<ListItem[]> => {
     )
   );
   const end = lines.findIndex((i) =>
-    / +总: [0-9.bBkKmMgGtT]+ +文件总数: \d+, 目录总数: \d+  /.test(i)
+    / +总: [0-9.bBkKmMgGtT]+ +文件总数: \d+, 目录总数: \d+ {2}/.test(i)
   );
   lines = lines.slice(start + 1, end);
   return lines

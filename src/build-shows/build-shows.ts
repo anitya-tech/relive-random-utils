@@ -1,7 +1,6 @@
 import fs from "fs/promises";
 
 import { CmsApi } from "./cms-api";
-import { batchCreateUsers } from "./create-user";
 import { File } from "./load-files";
 export interface VideoClip {
   start_time: Date;

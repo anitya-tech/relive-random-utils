@@ -1,6 +1,6 @@
-import { EasyS3 } from "infra-minio-v0";
 import { BiliApi } from "@gtr/random-bilibili-api";
 import { ReceivedGiftStreamList } from "@gtr/random-bilibili-api";
+import { EasyS3 } from "infra-minio-v0";
 import moment from "moment";
 
 import {
