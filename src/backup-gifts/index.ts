@@ -1,5 +1,6 @@
+import { EasyS3 } from "infra-minio-v0";
 import { BiliApi } from "@gtr/random-bilibili-api";
-import { ReceivedGiftStreamList } from "@gtr/random-bilibili-api/dist/apis/live/received-gift-stream-list";
+import { ReceivedGiftStreamList } from "@gtr/random-bilibili-api";
 import moment from "moment";
 
 import {
@@ -51,7 +52,7 @@ async function syncHistory(uid: number) {
 
   const redis = await getRedis();
   console.log("load: redis");
-  const s3 = await getS3();
+  const s3 = new EasyS3(getS3(), S3Bucket, S3KeyPrefix);
   console.log("load: s3");
 
   const now = moment.tz("Asia/Shanghai");
@@ -67,35 +68,30 @@ async function syncHistory(uid: number) {
     console.log(`[${pointer.format("YYYY/MM/DD")}]`);
     const gifts = await fetchOneDay(api, pointer);
 
-    const KeyPreifx = `${S3KeyPrefix}/${uid}/${pointer.format(
-      "YYYY"
-    )}/${pointer.format("MM-DD")}`;
+    const KeyPreifx = `${uid}/${pointer.format("YYYY")}/${pointer.format(
+      "MM-DD"
+    )}`;
 
     const params = {
-      Bucket: S3Bucket,
       ContentType: "application/json",
       CacheControl: "public, max-age=31536000",
     };
 
     if (gifts.length) {
-      await s3
-        .putObject({
-          ...params,
-          Key: `${KeyPreifx}.all.json`,
-          Body: JSON.stringify(gifts),
-        })
-        .promise();
+      await s3.putObject({
+        ...params,
+        Key: `${KeyPreifx}.all.json`,
+        Body: JSON.stringify(gifts),
+      });
     }
 
     const goldGifts = gifts.filter((i) => i.hamster);
     if (goldGifts.length) {
-      await s3
-        .putObject({
-          ...params,
-          Key: `${KeyPreifx}.gold.json`,
-          Body: JSON.stringify(goldGifts),
-        })
-        .promise();
+      await s3.putObject({
+        ...params,
+        Key: `${KeyPreifx}.gold.json`,
+        Body: JSON.stringify(goldGifts),
+      });
     }
 
     await redis.set(`${uid}:pointer`, pointer.toISOString());

@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 
-import { ReceivedGiftStreamList } from "@gtr/random-bilibili-api/dist/apis/live/received-gift-stream-list";
+import { ReceivedGiftStreamList } from "@gtr/random-bilibili-api";
 import moment from "moment-timezone";
 
 import { getS3, S3Bucket, S3KeyPrefix } from "./config";
@@ -28,7 +28,7 @@ async function getGiftMap(
   let list: GiftInfo[];
 
   try {
-    const data = await s3.getObject({ Bucket: S3Bucket, Key: _Key }).promise();
+    const data = await s3.getObject({ Bucket: S3Bucket, Key: _Key });
     list = JSON.parse(data.Body as string);
   } catch (e) {
     const giftConfig: {
@@ -37,13 +37,11 @@ async function getGiftMap(
 
     list = giftConfig.data.list;
 
-    await s3
-      .putObject({
-        Bucket: S3Bucket,
-        Key: _Key,
-        Body: JSON.stringify(list),
-      })
-      .promise();
+    await s3.putObject({
+      Bucket: S3Bucket,
+      Key: _Key,
+      Body: JSON.stringify(list),
+    });
   }
 
   return Object.fromEntries(list.map((i) => [i.id, i]));
@@ -85,18 +83,16 @@ async function backup(list: any) {
   const Key = `${S3KeyPrefix}/.random/old-dynamodb-data.json`;
 
   try {
-    await s3.headObject({ Bucket: S3Bucket, Key }).promise();
+    await s3.headObject({ Bucket: S3Bucket, Key });
   } catch (e: any) {
     if (e.statusCode === 404) {
-      await s3
-        .putObject({
-          Bucket: S3Bucket,
-          Key,
-          ContentType: "application/json",
-          ContentDisposition: "attachment",
-          Body: JSON.stringify(list),
-        })
-        .promise();
+      await s3.putObject({
+        Bucket: S3Bucket,
+        Key,
+        ContentType: "application/json",
+        ContentDisposition: "attachment",
+        Body: JSON.stringify(list),
+      });
     } else {
       throw e;
     }
@@ -172,27 +168,23 @@ async function transfer() {
         );
 
         console.log(`${uid}/${year}/${monthDay}`);
-        await s3
-          .putObject({
-            Bucket: S3Bucket,
-            ContentType: "application/json",
-            CacheControl: "public, max-age=31536000",
-            Key: `${S3KeyPrefix}/${uid}/${year}/${monthDay}.all.json`,
-            Body: JSON.stringify(list),
-          })
-          .promise();
+        await s3.putObject({
+          Bucket: S3Bucket,
+          ContentType: "application/json",
+          CacheControl: "public, max-age=31536000",
+          Key: `${S3KeyPrefix}/${uid}/${year}/${monthDay}.all.json`,
+          Body: JSON.stringify(list),
+        });
       }
     }
   }
 
   console.log(unknownGift);
-  await s3
-    .putObject({
-      Bucket: S3Bucket,
-      Key: `${S3KeyPrefix}/.random/2021.10.20-import-unknown-gifts.json`,
-      Body: JSON.stringify(unknownGift),
-    })
-    .promise();
+  await s3.putObject({
+    Bucket: S3Bucket,
+    Key: `${S3KeyPrefix}/.random/2021.10.20-import-unknown-gifts.json`,
+    Body: JSON.stringify(unknownGift),
+  });
 }
 
 transfer();

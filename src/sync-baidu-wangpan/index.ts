@@ -1,6 +1,8 @@
 import path from "path";
-import { bdpcs } from "./bdpcs";
+
 import { cms } from "../relive-cms/relive-cms";
+
+import { bdpcs } from "./bdpcs";
 
 // TODO: fixmd5
 

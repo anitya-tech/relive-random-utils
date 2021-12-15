@@ -1,8 +1,8 @@
 import os from "os";
 
-import { initMinio, S3 } from "@gtr-infra/minio";
 import { initRedis } from "@gtr-infra/redis";
 import { onceAsync } from "@gtr/utils";
+import { initMinio } from "infra-minio-v0";
 import moment from "moment-timezone";
 
 export const uploaderIdMap = {
