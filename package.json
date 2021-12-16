@@ -35,7 +35,7 @@
     "@geektr/strapi-client": "^0.0.4",
     "@gtr-infra/redis": "^0.0.24",
     "@gtr/config": "^1.1.0",
-    "@gtr/random-bilibili-api": "^0.0.17",
+    "@gtr/random-bilibili-api": "^0.0.19",
     "@gtr/utils": "^0.0.11",
     "ali-oss": "^6.16.0",
     "aws-sdk": "^2.951.0",

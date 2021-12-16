@@ -856,16 +856,6 @@
   dependencies:
     ioredis "^4.28.0"
 
-"@gtr/config@^1.0.1":
-  version "1.0.1"
-  resolved "https://npm.geektr.co/@gtr%2fconfig/-/config-1.0.1.tgz#09af091d50303087afd66696e80a13ed76ec8853"
-  integrity sha512-57bYv7Po58dr2bqirVGIQWDDDzovzmugjn5S/UJ52Cgz+sP7QU5lI5+qPa1Uz//1pAK6QnOXZX39ipyjfq+w9A==
-  dependencies:
-    axios "^0.21.1"
-    dotenv "^10.0.0"
-    is-docker "^2.2.1"
-    lodash.set "^4.3.2"
-
 "@gtr/config@^1.1.0":
   version "1.1.0"
   resolved "https://npm.geektr.co/@gtr%2fconfig/-/config-1.1.0.tgz#30e234ef685b75caa63371ee165491af88e2b743"
@@ -876,12 +866,12 @@
     is-docker "^2.2.1"
     lodash.set "^4.3.2"
 
-"@gtr/random-bilibili-api@^0.0.17":
-  version "0.0.17"
-  resolved "https://npm.geektr.co/@gtr%2frandom-bilibili-api/-/random-bilibili-api-0.0.17.tgz#90edfa260651b93f85f0392e51ae310a859a9db3"
-  integrity sha512-w2b290KGRV0Jbxgmb1qcwXnMNZ0/mGSGxvj27PPWXpkIikzKBqYy4yInaFdqRXRdnB93zJ6Jag7MIH7zi6Ki1g==
+"@gtr/random-bilibili-api@^0.0.19":
+  version "0.0.19"
+  resolved "https://npm.geektr.co/@gtr%2frandom-bilibili-api/-/random-bilibili-api-0.0.19.tgz#31c290d9e3560e229cdf27edc61a0dcd2515c3e7"
+  integrity sha512-PuEsStwLQYKX6/bIrDVgfEUMKAgra9LENDHla2dSNdyIPPjcAVebrQVxq+uOotSydCf4YPFz1gvjCmqJe9GSiA==
   dependencies:
-    "@gtr/config" "^1.0.1"
+    "@gtr/config" "^1.1.0"
     axios "^0.22.0"
     moment-timezone "^0.5.33"
 

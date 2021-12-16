@@ -3,7 +3,7 @@ import fs from "fs/promises";
 import { ReceivedGiftStreamList } from "@gtr/random-bilibili-api";
 import moment from "moment-timezone";
 
-import { getS3, S3Bucket, S3KeyPrefix } from "./config";
+import { getAnita, S3Bucket, S3KeyPrefix } from "./config";
 import { getRecordModel } from "./utils/dynamodb";
 
 const cacheFile = "logs/gifts-dynamodb.json";
@@ -23,7 +23,7 @@ async function getGiftMap(
   file: string,
   key: string
 ): Promise<Record<number, GiftInfo>> {
-  const s3 = await getS3();
+  const s3 = await getAnita();
   const _Key = `${S3KeyPrefix}/.random/${key}`;
   let list: GiftInfo[];
 
@@ -79,7 +79,7 @@ async function downloadDb(): Promise<any[]> {
 }
 
 async function backup(list: any) {
-  const s3 = await getS3();
+  const s3 = await getAnita();
   const Key = `${S3KeyPrefix}/.random/old-dynamodb-data.json`;
 
   try {
@@ -101,7 +101,7 @@ async function backup(list: any) {
 
 async function transfer() {
   const dbList = await downloadDb();
-  const s3 = await getS3();
+  const s3 = await getAnita();
 
   await backup(dbList);
 

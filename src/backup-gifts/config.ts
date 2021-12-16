@@ -21,7 +21,12 @@ export const fetchPageSize = 1000;
 
 const vaultPrefix = `projects/anitya/relive/base`;
 
-export const getS3 = onceAsync(() => initMinio(`${vaultPrefix}/minio/rw`));
+export const getAnita = onceAsync(() =>
+  initMinio(`projects/relive/core/minio/anita/rw`)
+);
+export const getMaggie = onceAsync(() =>
+  initMinio(`projects/relive/core/minio/maggie/rw`)
+);
 
 export const S3Bucket = "relive-bili";
 export const S3KeyPrefix = "live-gifts";

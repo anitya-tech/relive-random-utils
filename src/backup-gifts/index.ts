@@ -5,8 +5,8 @@ import moment from "moment";
 
 import {
   fetchPageSize,
+  getMaggie,
   getRedis,
-  getS3,
   S3Bucket,
   S3KeyPrefix,
   uploaderIdMap,
@@ -52,7 +52,7 @@ async function syncHistory(uid: number) {
 
   const redis = await getRedis();
   console.log("load: redis");
-  const s3 = new EasyS3(getS3(), S3Bucket, S3KeyPrefix);
+  const s3 = new EasyS3(getMaggie(), S3Bucket, S3KeyPrefix);
   console.log("load: s3");
 
   const now = moment.tz("Asia/Shanghai");
@@ -101,7 +101,7 @@ async function syncHistory(uid: number) {
 }
 
 async function syncAll() {
-  await syncHistory(uploaderIdMap.tsukasa);
+  // await syncHistory(uploaderIdMap.tsukasa);
   await syncHistory(uploaderIdMap.horo);
 
   (await getRedis()).disconnect();

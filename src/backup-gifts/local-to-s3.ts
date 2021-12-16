@@ -5,13 +5,13 @@ import { ReceivedGiftStreamList } from "@gtr/random-bilibili-api";
 import { EasyS3 } from "infra-minio-v0";
 import moment from "moment-timezone";
 
-import { getS3, S3Bucket, S3KeyPrefix } from "./config";
+import { getAnita, S3Bucket, S3KeyPrefix } from "./config";
 
 const datastore = "/home/geektr/playground/bilibili-gifts/datastore";
 const stopDate = moment("2021-04-18");
 
 async function start() {
-  const s3 = new EasyS3(getS3(), S3Bucket, S3KeyPrefix);
+  const s3 = new EasyS3(getAnita(), S3Bucket, S3KeyPrefix);
   console.log("load: s3");
 
   for (const uid of await fs.readdir(datastore)) {
@@ -50,7 +50,7 @@ async function start() {
 }
 
 async function fixMetadata() {
-  const s3 = new EasyS3(getS3(), S3Bucket);
+  const s3 = new EasyS3(getAnita(), S3Bucket);
 
   const objGenerator = s3.loopObjects({
     initState: () => ({ Prefix: S3KeyPrefix, MaxKeys: 100 }),

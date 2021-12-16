@@ -1,10 +1,10 @@
 import { ReceivedGiftStreamList } from "@gtr/random-bilibili-api";
 import { EasyS3 } from "infra-minio-v0";
 
-import { getS3, S3Bucket, S3KeyPrefix } from "./config";
+import { getAnita, S3Bucket, S3KeyPrefix } from "./config";
 
 async function fixMetadata() {
-  const s3 = new EasyS3(getS3(), S3Bucket);
+  const s3 = new EasyS3(getAnita(), S3Bucket);
 
   const objGenerator = s3.loopObjects({
     initState: () => ({ Prefix: S3KeyPrefix, MaxKeys: 100 }),
