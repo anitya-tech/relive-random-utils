@@ -959,6 +959,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/mime@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.3.tgz#c893b73721db73699943bfc3653b1deb7faa4a3a"
+  integrity sha512-Jus9s4CDbqwocc5pOAnh8ShfrnMcPHuJYzVcSUU7lrh8Ni5HuIqX3oilL86p3dlTrk0LzHRCgA/GQ7uNCw6l2Q==
+
 "@types/minimist@^1.2.0":
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/@types/minimist/-/minimist-1.2.2.tgz#ee771e2ba4b3dc5b372935d549fd9617bf345b8c"
@@ -2227,9 +2232,9 @@ inflight@^1.0.4:
     "@gtr/config" "^1.1.0"
 
 "infra-minio-v1@npm:@gtr-infra/minio@1":
-  version "1.0.1"
-  resolved "https://npm.geektr.co/@gtr-infra%2fminio/-/minio-1.0.1.tgz#b0a13ea56df44f711e2a3967b3d6cc2d325e7990"
-  integrity sha512-0ov4mOFIK4ibssIjhpU/oSHyrCDdPplCIP+5HB9PvRO0bWrNAiw9XYd+ankXfJgGG+pdgBjBIJrO273B+QePHw==
+  version "1.0.2"
+  resolved "https://npm.geektr.co/@gtr-infra%2fminio/-/minio-1.0.2.tgz#2d1dc38f795baaa4da2428ea2c2f89db68d553e5"
+  integrity sha512-RxaXCY9nfrorSwKf6s3DBOoJ1494yZ8HNXzLAghlAbe9Hl8E2TVjzBvRki67+kuHi/PudZ+q8lOafSgSpOq3Ag==
   dependencies:
     "@aws-sdk/client-s3" "^3.41.0"
     "@gtr/config" "^1.1.0"
@@ -2756,6 +2761,11 @@ mime@^2.4.5, mime@^2.5.2:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/mime/-/mime-2.5.2.tgz#6e3dc6cc2b9510643830e5f19d5cb753da5eeabe"
   integrity sha512-tqkh47FzKeCPD2PUiPB6pkbMzsCasjxAfC62/Wap5qrUWcb+sFasXUC5I3gYM5iBM8v/Qpn4UK0x+j0iHyFPDg==
+
+mime@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/mime/-/mime-3.0.0.tgz#b374550dca3a0c18443b0c950a6a58f1931cf7a7"
+  integrity sha512-jSCU7/VB1loIWBZe14aEYHU/+1UMEHoaO7qxCOVJOw9GgH72VAWppxNcjU+x9a2k3GSIBXNKxXQFqRvvZ7vr3A==
 
 min-indent@^1.0.0:
   version "1.0.1"
