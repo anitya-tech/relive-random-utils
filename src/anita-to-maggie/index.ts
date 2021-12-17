@@ -8,13 +8,19 @@ import { getLogger } from "../common/log";
 import { FileMeta, fileTypeMap, parseDateTime } from "../common/utils";
 
 const parseKey = (key: string) => {
-  const result = key.match(
-    /(?<fullpath>stream\/(?<encode_state>raw|encoded)\/(?<room_id>\d+)\/(?<date>\d{8}))\/(?<filename>(?<time>\d{6})\.(?<extension>\w+))/
-  );
+  const result =
+    key.match(
+      /stream\/(?<encode_state>raw|encoded)\/(?<room_id>\d+)\/(?<date>\d{8})\/(?<time>\d{6})\.(?<extension>\w+)/
+    ) ||
+    key.match(
+      /stream\/(?<encode_state>raw|encoded)\/(?<room_id>\d+)\/(\d+)-(?<date>\d{8})-(?<time>\d{6})-(?<ms>\d+)\.(?<extension>\w+)/
+    );
+
   if (!result?.groups) throw `parse error: ${key}`;
 
-  const { room_id, date, time, extension, filename, fullpath } = result.groups;
-  return { room_id, date, time, extension, filename, fullpath };
+  const { room_id, date, time, extension, encode_state } = result.groups;
+  const expect_key = `stream/${encode_state}/${room_id}/${date}/${time}.${extension}`;
+  return { room_id, date, time, extension, encode_state, expect_key };
 };
 
 const transfer = async (Prefix: string) => {
@@ -45,14 +51,14 @@ const transfer = async (Prefix: string) => {
     logger.info(Key);
     console.log(Key);
 
-    const { room_id, date, time, extension } = parseKey(Key);
+    const { room_id, date, time, extension, expect_key } = parseKey(Key);
 
     logger.info("get object...");
     const { Body } = await Obj.getObject({});
     if (!(Body instanceof Readable)) throw `${Key} Body is not stream`;
 
     logger.info("start upload...");
-    const uploadPromise = maggie.mkObject(Key).putObject({
+    const uploadPromise = maggie.mkObject(expect_key).putObject({
       Body: Body.pipe(new PassThrough()),
       ContentLength,
       ContentType: mime.getType(extension) || undefined,
@@ -73,7 +79,7 @@ const transfer = async (Prefix: string) => {
 
     logger.info("start upload meta...");
     const uploadMetaPromise = metaPromise.then((meta) =>
-      maggie.mkObject(`${Key}.meta`).putObject({
+      maggie.mkObject(`${expect_key}.meta`).putObject({
         Body: JSON.stringify(meta),
         ContentType: "application/json",
       })
