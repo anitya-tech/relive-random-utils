@@ -1,4 +1,4 @@
-import { ReceivedGiftStreamList } from "@gtr/random-bilibili-api";
+import { LiveRoom } from "@gtr/random-bilibili-api";
 import { EasyS3 } from "infra-minio-v0";
 
 import { getAnita, S3Bucket, S3KeyPrefix } from "./config";
@@ -28,7 +28,9 @@ async function fixMetadata() {
     const resp = await s3.getObject({ Key });
 
     const Body = JSON.stringify(
-      (resp.Body as ReceivedGiftStreamList.Record[]).filter((i) => i.hamster)
+      (resp.Body as LiveRoom.ReceivedGiftStreamList.Record[]).filter(
+        (i) => i.hamster
+      )
     );
 
     await s3.putObject({

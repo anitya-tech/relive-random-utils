@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 
-import { ReceivedGiftStreamList } from "@gtr/random-bilibili-api";
+import { LiveRoom } from "@gtr/random-bilibili-api";
 import moment from "moment-timezone";
 
 import { getAnita, S3Bucket, S3KeyPrefix } from "./config";
@@ -8,7 +8,7 @@ import { getRecordModel } from "./utils/dynamodb";
 
 const cacheFile = "logs/gifts-dynamodb.json";
 
-interface ExtRecord extends ReceivedGiftStreamList.Record {
+interface ExtRecord extends LiveRoom.ReceivedGiftStreamList.Record {
   uploader_id: number;
 }
 
@@ -107,10 +107,13 @@ async function transfer() {
 
   const userGifts: Record<
     number,
-    Record<string, Record<string, ReceivedGiftStreamList.Record[]>>
+    Record<string, Record<string, LiveRoom.ReceivedGiftStreamList.Record[]>>
   > = {};
 
-  const addGift = (uid: number, gift: ReceivedGiftStreamList.Record) => {
+  const addGift = (
+    uid: number,
+    gift: LiveRoom.ReceivedGiftStreamList.Record
+  ) => {
     const date = moment.tz(gift.time, "Asia/Shanghai");
     const year = date.format("YYYY");
     const monthDay = date.format("MM-DD");

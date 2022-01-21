@@ -1,5 +1,4 @@
-import { BiliApi } from "@gtr/random-bilibili-api";
-import { ReceivedGiftStreamList } from "@gtr/random-bilibili-api";
+import { BiliApi, LiveRoom } from "@gtr/random-bilibili-api";
 import { EasyS3 } from "infra-minio-v0";
 import moment from "moment";
 
@@ -14,12 +13,12 @@ import {
 
 const fetchOneDay = async (api: BiliApi, date: moment.Moment) => {
   let page = 0;
-  const giftRecordList: ReceivedGiftStreamList.Record[] = [];
+  const giftRecordList: LiveRoom.ReceivedGiftStreamList.Record[] = [];
 
   // eslint-disable-next-line no-constant-condition
   while (true) {
     try {
-      const data = await api.receivedGiftStreamList({
+      const data = await api.liveroom.receivedGiftStreamList({
         page,
         size: fetchPageSize,
         coin_type: 0,
@@ -101,7 +100,7 @@ async function syncHistory(uid: number) {
 }
 
 async function syncAll() {
-  // await syncHistory(uploaderIdMap.tsukasa);
+  await syncHistory(uploaderIdMap.tsukasa);
   await syncHistory(uploaderIdMap.horo);
 
   (await getRedis()).disconnect();

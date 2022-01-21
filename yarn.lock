@@ -866,10 +866,10 @@
     is-docker "^2.2.1"
     lodash.set "^4.3.2"
 
-"@gtr/random-bilibili-api@^0.0.19":
-  version "0.0.19"
-  resolved "https://npm.geektr.co/@gtr%2frandom-bilibili-api/-/random-bilibili-api-0.0.19.tgz#31c290d9e3560e229cdf27edc61a0dcd2515c3e7"
-  integrity sha512-PuEsStwLQYKX6/bIrDVgfEUMKAgra9LENDHla2dSNdyIPPjcAVebrQVxq+uOotSydCf4YPFz1gvjCmqJe9GSiA==
+"@gtr/random-bilibili-api@^1.0.0":
+  version "1.0.0"
+  resolved "https://npm.geektr.co/@gtr%2frandom-bilibili-api/-/random-bilibili-api-1.0.0.tgz#d87f9b62c68ab5c0997fe7ec479c1ace5c2dbe51"
+  integrity sha512-FtlxJNF/BiR+ta4qLAXeStDTJShlFfjGIDJVqiodm8jvOSg/6AQC1Rxt3CfbtbdJDUAgm68Tt7djSIF8RoHMqw==
   dependencies:
     "@gtr/config" "^1.1.0"
     axios "^0.22.0"

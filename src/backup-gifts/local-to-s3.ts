@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 
-import { ReceivedGiftStreamList } from "@gtr/random-bilibili-api";
+import { LiveRoom } from "@gtr/random-bilibili-api";
 import { EasyS3 } from "infra-minio-v0";
 import moment from "moment-timezone";
 
@@ -27,7 +27,7 @@ async function start() {
         "cache-control": "public, max-age=31536000",
       };
 
-      const gifts: ReceivedGiftStreamList.Record[] = JSON.parse(
+      const gifts: LiveRoom.ReceivedGiftStreamList.Record[] = JSON.parse(
         await fs.readFile(path.join(datastore, uid, file), "utf-8")
       );
       if (gifts.length) {
